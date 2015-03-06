@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'RestSwiftly', :exclusive => true do
+  pod "RestSwiftly", :path => "../"
+end
+
+target 'Tests', :exclusive => true do
+  pod "RestSwiftly", :path => "../"
+
+  pod 'Specta'
+  pod 'Expecta'
+end
