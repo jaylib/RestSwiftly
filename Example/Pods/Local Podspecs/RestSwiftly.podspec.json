@@ -1,0 +1,51 @@
+{
+  "name": "RestSwiftly",
+  "version": "0.1.0",
+  "summary": "A short description of RestSwiftly.",
+  "description": "    An optional longer description of RestSwiftly\n    * Markdown format.\n    * Don't worry about the indent, we strip it!\n",
+  "homepage": "https://github.com/jaylib/RestSwiftly",
+  "license": "MIT",
+  "authors": {
+    "Josef Materi": "josef.materi@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/jaylib/RestSwiftly.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "requires_arc": true,
+  "resource_bundles": {
+    "RestSwiftly": [
+      "Pod/Assets/*.png"
+    ]
+  },
+  "subspecs": [
+    {
+      "name": "Core",
+      "source_files": "Pod/Classes/*.swift",
+      "dependencies": {
+        "Alamofire": [
+
+        ],
+        "ObjectMapper": [
+
+        ],
+        "ExSwift": [
+
+        ],
+        "Moya": [
+
+        ],
+        "LlamaKit": [
+
+        ],
+        "ReactiveCocoa": [
+
+        ]
+      },
+      "frameworks": "Foundation"
+    }
+  ]
+}

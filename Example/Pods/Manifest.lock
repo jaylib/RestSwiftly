@@ -1,0 +1,90 @@
+PODS:
+  - Alamofire (1.1.4)
+  - ExSwift (0.1.9)
+  - LlamaKit (0.6.0)
+  - Moya (0.6.1):
+    - Moya/Core (= 0.6.1)
+  - Moya/Core (0.6.1):
+    - Alamofire (~> 1.1.0)
+  - ObjectMapper (0.6)
+  - ReactiveCocoa (3.0.0-alpha1):
+    - LlamaKit (= 0.6.0)
+    - ReactiveCocoa/UI (= 3.0.0-alpha1)
+  - ReactiveCocoa/Core (3.0.0-alpha1):
+    - LlamaKit (= 0.6.0)
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/no-arc (3.0.0-alpha1):
+    - LlamaKit (= 0.6.0)
+  - ReactiveCocoa/UI (3.0.0-alpha1):
+    - LlamaKit (= 0.6.0)
+    - ReactiveCocoa/Core
+  - RestSwiftly (0.1.0):
+    - RestSwiftly/Core (= 0.1.0)
+  - RestSwiftly/Core (0.1.0):
+    - Alamofire
+    - ExSwift
+    - LlamaKit
+    - Moya
+    - ObjectMapper
+    - ReactiveCocoa
+
+DEPENDENCIES:
+  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, branch `xcode-6.3`)
+  - ExSwift (from `https://github.com/pNre/ExSwift.git`, branch `Swift-1.2`)
+  - LlamaKit (from `https://github.com/LlamaKit/LlamaKit.git`)
+  - Moya (from `https://github.com/jaylib/Moya.git`, branch `endpoint_hash`)
+  - ObjectMapper (from `https://github.com/jaylib/ObjectMapper.git`, branch `swift-1.2`)
+  - ReactiveCocoa (from `https://github.com/jaylib/ReactiveCocoa.git`, branch `swift-1.2`)
+  - RestSwiftly (from `../`)
+
+EXTERNAL SOURCES:
+  Alamofire:
+    :branch: xcode-6.3
+    :git: https://github.com/Alamofire/Alamofire.git
+  ExSwift:
+    :branch: Swift-1.2
+    :git: https://github.com/pNre/ExSwift.git
+  LlamaKit:
+    :git: https://github.com/LlamaKit/LlamaKit.git
+  Moya:
+    :branch: endpoint_hash
+    :git: https://github.com/jaylib/Moya.git
+  ObjectMapper:
+    :branch: swift-1.2
+    :git: https://github.com/jaylib/ObjectMapper.git
+  ReactiveCocoa:
+    :branch: swift-1.2
+    :git: https://github.com/jaylib/ReactiveCocoa.git
+  RestSwiftly:
+    :path: ../
+
+CHECKOUT OPTIONS:
+  Alamofire:
+    :commit: 2f39b8634ab85cd6b3a55bbcfdec8cbb6463a6ee
+    :git: https://github.com/Alamofire/Alamofire.git
+  ExSwift:
+    :commit: fe7011193a2aa4997ce481d8689cc7ef173ee763
+    :git: https://github.com/pNre/ExSwift.git
+  LlamaKit:
+    :commit: b1ea36908a3719e009e6b5b8ad5c2de5a756b726
+    :git: https://github.com/LlamaKit/LlamaKit.git
+  Moya:
+    :commit: b0d9da13a9a72fcdcda4a8f86cc0f3abd2607832
+    :git: https://github.com/jaylib/Moya.git
+  ObjectMapper:
+    :commit: 8e32e11677479a8fbfbfddf5d860e766e1fc761a
+    :git: https://github.com/jaylib/ObjectMapper.git
+  ReactiveCocoa:
+    :commit: a7b3d20d9eb4666a32b44d507e517a82b48806dd
+    :git: https://github.com/jaylib/ReactiveCocoa.git
+
+SPEC CHECKSUMS:
+  Alamofire: 6a2cbaebe78a6d469bc55ee37f0a24ba22af76ac
+  ExSwift: 66c4dcef758ad184556954610ecadcabad3c1b36
+  LlamaKit: 86cea401172a666a16c6b5f033a256c803b3b116
+  Moya: 6589de6c52d9d8e5ab0d9630b4cd5c4b7f898019
+  ObjectMapper: 29c30424027e465a333ab24257be862e1cb7fd62
+  ReactiveCocoa: d15ef45cb57e7942111981ebca05058410a22668
+  RestSwiftly: a3de9baddff7c1b8fb51c6409608c1ca10bf6c50
+
+COCOAPODS: 0.36.0.rc.1

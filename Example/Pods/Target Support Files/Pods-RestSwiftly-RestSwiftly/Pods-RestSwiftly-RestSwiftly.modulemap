@@ -1,0 +1,6 @@
+framework module RestSwiftly {
+  umbrella header "Pods-RestSwiftly-RestSwiftly-umbrella.h"
+
+  export *
+  module * { export * }
+}

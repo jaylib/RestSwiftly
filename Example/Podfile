@@ -1,12 +1,21 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
+use_frameworks!
+
 target 'RestSwiftly', :exclusive => true do
-  pod "RestSwiftly", :path => "../"
+    pod "ReactiveCocoa", :git => "https://github.com/jaylib/ReactiveCocoa.git", :branch => "swift-1.2"
+    pod "LlamaKit", :git => "https://github.com/LlamaKit/LlamaKit.git"
+    pod "Alamofire", :git => "https://github.com/Alamofire/Alamofire.git", :branch => "xcode-6.3"
+    pod "Moya", :git => "https://github.com/jaylib/Moya.git", :branch => "endpoint_hash"
+    pod "ObjectMapper", :git => "https://github.com/jaylib/ObjectMapper.git", :branch => "swift-1.2"
+    pod "ExSwift", :git => "https://github.com/pNre/ExSwift.git", :branch => "Swift-1.2"
+    pod "RestSwiftly", :path => "../"
 end
 
-target 'Tests', :exclusive => true do
-  pod "RestSwiftly", :path => "../"
-
-  pod 'Specta'
-  pod 'Expecta'
-end
+#
+#target 'Tests', :exclusive => true do
+#  pod "RestSwiftly", :path => "../"
+#
+#  pod 'Specta'
+#  pod 'Expecta'
+#end

@@ -1,0 +1,6 @@
+framework module ExSwift {
+  umbrella header "Pods-RestSwiftly-ExSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}
