@@ -20,25 +20,21 @@ public class Datasource<T: FetchResultMapping>  {
     
     public
 
-    typealias LoggingClosure = (log: String) -> ()
-
     let defaultParameters: [String: AnyObject]
-    
-    var loggingClosure : LoggingClosure?
     
     init(provider: MoyaProvider<T>, defaultParameters: [String: AnyObject] = [:]) {
         self.provider = provider
         self.defaultParameters = defaultParameters
     }
     
-    convenience init(defaultParameters: [String: AnyObject] = [:], headerFields: [String : String] = [:]) {
-        
-        let endpointsClosure = { (target: T, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<T> in
-            return Endpoint<T>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: [:], parameterEncoding: .URL, httpHeaderFields:headerFields)
-        }
-        let provider = MoyaProvider(endpointsClosure: endpointsClosure)
-        self.init(provider: provider, defaultParameters: defaultParameters)
-    }
+//    convenience init(defaultParameters: [String: AnyObject] = [:], headerFields: [String : String] = [:]) {
+//        
+//        let endpointsClosure = { (target: T, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<T> in
+//            return Endpoint<T>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: [:], parameterEncoding: .URL, httpHeaderFields:headerFields)
+//        }
+//        let provider = MoyaProvider(endpointsClosure: endpointsClosure)
+//        self.init(provider: provider, defaultParameters: defaultParameters)
+//    }
     
 
     
@@ -85,7 +81,7 @@ public func url(route: MoyaTarget) -> String {
     return route.baseURL.URLByAppendingPathComponent(route.path).absoluteString!
 }
 
-func authentication(#user: String, #password: String) -> [String : String] {
+public func authentication(#user: String, #password: String) -> [String : String] {
     
     let loginString = NSString(format: "%@:%@", user, password)
     let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
@@ -118,7 +114,7 @@ public func toObject<T: FetchResultMapping>(operation: () -> T)(json: AnyObject)
     
 }
 
-func toJSON(response: MoyaResponse) -> Result<AnyObject, NSError> {
+public func toJSON(response: MoyaResponse) -> Result<AnyObject, NSError> {
     var error : NSError? = NSError(domain: "", code: 0, userInfo: nil)
     var json: AnyObject?
     json = NSJSONSerialization.JSONObjectWithData(response.data, options: NSJSONReadingOptions.AllowFragments, error: &error)

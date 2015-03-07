@@ -17,12 +17,16 @@ public class ReactiveDatasource<T: FetchResultMapping> : Datasource<T>  {
     
     private var provider : ReactiveMoyaProvider<T>
     
-    init(provider: ReactiveMoyaProvider<T>, defaultParameters: [String : AnyObject] = [:]) {
+    private var inflightSignals = [String : Signal<Mappable, NSError>]()
+    private var inflightObservers = [String : SinkOf<Event<Mappable, NSError>>]()
+
+    
+    public init(provider: ReactiveMoyaProvider<T>, defaultParameters: [String : AnyObject] = [:]) {
         self.provider = provider
         super.init(provider: provider, defaultParameters: defaultParameters)
     }
     
-    convenience init(defaultParameters: [String: AnyObject] = [:], headerFields: [String : String] = [:]) {
+    public convenience init(defaultParameters: [String: AnyObject] = [:], headerFields: [String : String] = [:]) {
         
         let endpointsClosure = { (target: T, method: Moya.Method, parameters: [String: AnyObject]) -> Endpoint<T> in
             return Endpoint<T>(URL: url(target), sampleResponse: .Success(200, target.sampleData), method: method, parameters: parameters, parameterEncoding: .URL, httpHeaderFields:headerFields)
@@ -33,18 +37,43 @@ public class ReactiveDatasource<T: FetchResultMapping> : Datasource<T>  {
     
     
     // Mark: Designated Request Method
-    func request(token: T, method: Moya.Method, parameters: [String : AnyObject]) -> Signal<Mappable, NSError> {
+    public func request(token: T, method: Moya.Method, parameters: [String : AnyObject]) -> Signal<Mappable, NSError> {
         let mergedParameters =  defaultParameters | parameters
         return self.provider.request(token, method: method, parameters: mergedParameters) |> mapJSON |> mapModels { return token }
     }
     
-    func fetch(token: T, parameters: [String: AnyObject] = [:]) -> Signal<Mappable, NSError> {
-        return self.request(token, method: .GET, parameters: parameters)
+    public func fetch(token: T, parameters: [String: AnyObject] = [:]) -> Signal<Mappable, NSError> {
+        self.request(token, method: .GET, parameters: parameters).observe(next: { mappable in
+            
+            if let observer = self.observerForToken(token) {
+                sendNext(observer, mappable)
+            }
+            
+            }, error: { error in
+            
+            }) { () -> () in
+            
+        }
+        return signalFor(token)
     }
     
-    public func test(token: T, method: Moya.Method, parameters: [String : AnyObject]) -> Signal<Mappable, NSError>  {
-        let mergedParameters =  defaultParameters | parameters
-        return self.provider.request(token, method: method, parameters: mergedParameters) |> mapJSON |> mapModels { return token }
+    public func signal(token: T, parameters: [String: AnyObject] = [:]) -> Signal<Mappable, NSError> {
+        return signalFor(token)
+    }
+    
+    func signalFor(token: T) -> Signal<Mappable, NSError> {
+        if let signal = self.inflightSignals[token.path] {
+            return signal
+        } else {
+            let (signal, sink) = Signal<Mappable, NSError>.pipe()
+            self.inflightSignals.updateValue(signal, forKey: token.path)
+            self.inflightObservers.updateValue(sink, forKey: token.path)
+            return signal
+        }
+    }
+    
+    func observerForToken(token: T) -> SinkOf<Event<Mappable, NSError>>? {
+        return self.inflightObservers[token.path]
     }
     
 }
